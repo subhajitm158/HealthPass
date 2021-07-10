@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    @font-face {
+      font-family: peterMedium;
+      src: url(peter_medium.otf);
+    }
+
+    @font-face {
+      font-family: peterLight;
+      src: url(peter_light.otf);
+    }
+
+    body {
+      background-image: url("cocus_main.jpg");
+      background-color: #ffffff;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: right bottom;
+
+      background-attachment: fixed;
+      max-width: 100%;
+      max-height: 90%;
+      margin: auto;
+      align-items: center background-color: #66b203;
+    }
+
+    .header1 {
+      font-family: peterMedium;
+      color: #ff961e;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      max-width: 80%;
+      font-size: 62px;
+    }
+
+    h2.header2 {
+      font-family: peterLight;
+      color: white;
+      text-align: center;
+      font-size: 24px;
+      box-align: center;
+      box-sizing: border-box;
+      padding: 20px;
+      margin: 0px;
+      margin-top: 1%;
+      width: 100%;
+
+    }
+
+    .container {
+      position: relative;
+      padding-top: 8%;
+      padding-bottom: 8%;
+      background-color: white;
+    }
+
+    .timer {
+      color: gray;
+      font-family: peterMedium;
+    }
+
+    .floatreset {
+      clear: both;
+    }
+
+    .logo {
+      display: block;
+      margin-left: 10%;
+      margin-right: auto;
+      width: 35%;
+      float: left;
+      max-width: 475px;
+      max-height: 321px;
+    }
+
+    .vflogo {
+      width: 40px;
+      height: 40px;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+
+    .qrcode {
+      display: block;
+      margin-right: 10%;
+      width: 35%;
+      float: right;
+    }
+
+    .power {
+      margin-top: 0px;
+      font-family: peterLight;
+    }
+
+    div#deeplink {
+      display: inline;
+    }
+
+
+    div#deeplink a:link {
+      color: white;
+    }
+
+    div#deeplink a:visited {
+      color: white;
+    }
+
+    div#deeplink a:hover {
+      color: #097900;
+    }
+
+    div#deeplink a:active {
+      color: #097900;
+    }
+  </style>
+  <script src="/js/bundle.js"></script>
+  <script>
+    var deadline = new Date().getTime() + 5 * 60000;
+    var x = setInterval(function () {
+      var now = new Date().getTime();
+      var t = deadline - now;
+      var days = Math.floor(t / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((t % (1000 * 60)) / 1000);
+      document.getElementById("exp-timer").innerHTML = "QR code expires in: " + minutes + "m " +
+        seconds + "s ";
+      if (t < 0) {
+        clearInterval(x);
+        document.getElementById("exp-timer").innerHTML =
+          "QR Code expired, <a href='#refresh' onClick='window.location.reload(true);'>click here to refresh the page</a>";
+      }
+    }, 1000);
+  </script>
+</head>
+
+<body>
+  <div class="container">
+    <img class="logo" src="logo.png" alt="Lorenzos Pizza Logo">
+    <!--<h1 class="header1">Blockchain Identity Login Demo</h1>-->
+
+    <div class="qrcode" id="qrcode" align="center">
+      <div id="qrcanvas"></div>
+      <div>
+        <h4 id="exp-timer" class="timer">00:00:00</h4>
+      </div>
+      <div class="power">
+        <img class="vflogo" src="vodafone-logo.png">Powered by Vodafone DDI
+      </div>
+
+    </div>
+    <div class="floatreset"></div>
+  </div>
+  <h2 class="header2">Please scan the QR Code or click on the <div id="deeplink"></div> to proceed with your login.</h2>
+
+</body>
+
+</html>

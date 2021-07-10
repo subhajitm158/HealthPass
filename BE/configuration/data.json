@@ -1,0 +1,22 @@
+[
+	{
+		"Name": "Sample User",
+		"Age": "25",
+		"Gender": "Male",
+		"ID_Verified": "XXXXXXXXXX2587",
+		"Reference_ID": "6598784532124565",
+		"Date_Of_Birth": "17/03/1983",
+		"Pass_Expiry_Date": "07/02/2021",
+		"Pass_Expiry_Time": "11:53 PM EDT",
+		"Phone": "9632147850",
+		"Email": "Sample@user.com",
+		"Address_Street": "Sample Street",
+		"Address_City": "Sample City",
+		"Address_District": "Sample DIstrict",
+		"Target_Disease": "Covid-19",
+		"Vaccine_Name": "Pfizer-Biotech",
+		"Vaccine_Code": "0002A",
+		"Vaccine_Date": "05/02/2021",
+		"Vaccine_Center": "Sample Hospital"
+	}
+]
