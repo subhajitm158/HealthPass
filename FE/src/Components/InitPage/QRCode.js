@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import QRCode from 'qrcode';
+import axios from 'axios';
 import vodafoneLogo from '../InitPage/Assets/vodafone-logo.png';
 import './Style/style.css';
 import jwt from 'jsonwebtoken';
@@ -45,13 +46,27 @@ class QRCodeClass extends Component {
 		}
 	};
 
+	call = () => {
+		axios
+			.post('http://localhost:5000' + config['details-route'], {
+				headers: {
+					'x-token-auth': this.state.data,
+					'Access-Control-Allow-Origin': '*',
+				},
+			})
+			.then(function (response) {
+				console.log(response);
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+	};
+
 	timer = () => {
 		var deadline = new Date().getTime() + 0.1 * 60000;
 		var x = setInterval(function () {
 			var now = new Date().getTime();
 			var t = deadline - now;
-			var days = Math.floor(t / (1000 * 60 * 60 * 24));
-			var hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 			var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
 			var seconds = Math.floor((t % (1000 * 60)) / 1000);
 			document.getElementById('exp-timer').innerHTML =
@@ -81,7 +96,7 @@ class QRCodeClass extends Component {
 					) : null}
 				</div>
 				<div id='exp-timer' className='qrTimerDiv-q'>
-					{this.state.imageUrl ? this.timer() : null}
+					{this.state.imageUrl ? this.call() : null}
 				</div>
 			</div>
 		);

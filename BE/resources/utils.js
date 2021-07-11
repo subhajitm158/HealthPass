@@ -51,7 +51,7 @@ exports.getNonce = function () {
 		port: 443,
 		path: '/nonce',
 		headers: {
-			'traceparent': trace_id,
+			traceparent: trace_id,
 		},
 	};
 	return new Promise((resolve, reject) => {
@@ -75,7 +75,10 @@ exports.getNonce = function () {
 	});
 };
 
-exports.getUserDetails = () => {
+exports.getUserDetails = (token) => {
+	let extraPayload = jwt.decodeJWT(token);
+	data.push({ extraPayload });
+
 	let payload = jwt.createJWTDetails(data);
 
 	return payload;

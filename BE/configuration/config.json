@@ -12,5 +12,6 @@
 	"GCLLoginUrlVanilla": "https://dev.api.ddi.id.vodafone.com/",
 	"serviceName": "Health Pass",
 	"jwtKey": "AjHE*f~4%V==nJz0tv(4m2jLJ75z!&<S",
-	"jwtExpSeconds": "300"
+	"jwtExpSeconds": "300",
+	"PORT": "5000"
 }
