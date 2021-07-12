@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import jwt from 'jsonwebtoken';
+import axios from 'axios';
 import config from '../Configuration/config.json';
 
 class Header extends Component {
@@ -12,14 +13,20 @@ class Header extends Component {
 	}
 
 	componentDidMount() {
-		fetch('/api/details')
-			.then((res) => res.json())
-			.then((encodedData) =>
-				this.setState({ encodedData }, () => {
+		axios
+			.get(config['details-route'], {
+				headers: {
+					'x-token-auth': sessionStorage.getItem('session'),
+				},
+			})
+			.then((response) => {
+				this.setState({ encodedData: response.data }, () => {
 					this.decodeJWT();
-					console.log('encodeddata', encodedData);
-				})
-			);
+				});
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
 	}
 
 	decodeJWT = () => {
@@ -27,7 +34,7 @@ class Header extends Component {
 			let dataDec = jwt.verify(this.state.encodedData, config['jwtKey'], {
 				algorithm: 'HS256',
 			});
-			this.setState({ data: dataDec }, console.log('data', dataDec));
+			this.setState({ data: dataDec });
 		} catch (err) {
 			console.error(err);
 		}

@@ -8,7 +8,6 @@ router.get('/', async (req, res) => {
 
 		if (!token) {
 			res.status(400).send('missing auth');
-			res.redirect('/api');
 		} else {
 			completeCall(res, token);
 		}

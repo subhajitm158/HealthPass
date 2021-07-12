@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import QRCode from 'qrcode';
-import axios from 'axios';
+import jwt from 'jsonwebtoken';
 import vodafoneLogo from '../InitPage/Assets/vodafone-logo.png';
 import './Style/style.css';
-import jwt from 'jsonwebtoken';
 import config from '../Configuration/config.json';
 
 class QRCodeClass extends Component {
@@ -21,7 +20,6 @@ class QRCodeClass extends Component {
 			.then((data) =>
 				this.setState({ data }, () => {
 					this.generateQR();
-					console.log('data', data);
 				})
 			);
 	}
@@ -30,6 +28,7 @@ class QRCodeClass extends Component {
 		try {
 			const imageUrl = await QRCode.toDataURL(this.state.data);
 			this.setState({ imageUrl });
+			sessionStorage.setItem('session', this.state.data);
 		} catch (error) {
 			console.error(error);
 		}
@@ -44,22 +43,6 @@ class QRCodeClass extends Component {
 		} catch (err) {
 			console.error(err);
 		}
-	};
-
-	call = () => {
-		axios
-			.post('http://localhost:5000' + config['details-route'], {
-				headers: {
-					'x-token-auth': this.state.data,
-					'Access-Control-Allow-Origin': '*',
-				},
-			})
-			.then(function (response) {
-				console.log(response);
-			})
-			.catch(function (error) {
-				console.log(error);
-			});
 	};
 
 	timer = () => {
@@ -96,7 +79,7 @@ class QRCodeClass extends Component {
 					) : null}
 				</div>
 				<div id='exp-timer' className='qrTimerDiv-q'>
-					{this.state.imageUrl ? this.call() : null}
+					{this.state.imageUrl ? this.timer() : null}
 				</div>
 			</div>
 		);

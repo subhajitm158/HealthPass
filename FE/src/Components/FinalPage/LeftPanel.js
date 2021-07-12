@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import dot from './Assets/dot.png';
 import QRCode from 'qrcode';
 import jwt from 'jsonwebtoken';
+import axios from 'axios';
 import config from '../Configuration/config.json';
 
 class LeftPanel extends Component {
 	constructor() {
 		super();
 		this.state = {
+			tokenInfo: '',
 			encodedData: '',
 			data: [],
 			imageUrl: '',
@@ -15,15 +17,21 @@ class LeftPanel extends Component {
 	}
 
 	componentDidMount() {
-		fetch(config['details-route'])
-			.then((res) => res.json())
-			.then((encodedData) =>
-				this.setState({ encodedData }, () => {
+		axios
+			.get(config['details-route'], {
+				headers: {
+					'x-token-auth': sessionStorage.getItem('session'),
+				},
+			})
+			.then((response) => {
+				this.setState({ encodedData: response.data }, () => {
 					this.generateQR();
 					this.decodeJWT();
-					console.log('encodeddata', encodedData);
-				})
-			);
+				});
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
 	}
 
 	generateQR = async () => {
@@ -40,7 +48,7 @@ class LeftPanel extends Component {
 			let dataDec = jwt.verify(this.state.encodedData, config['jwtKey'], {
 				algorithm: 'HS256',
 			});
-			this.setState({ data: dataDec }, console.log('data', dataDec));
+			this.setState({ data: dataDec });
 		} catch (err) {
 			console.error(err);
 		}
@@ -100,8 +108,8 @@ class LeftPanel extends Component {
 						</button>
 					</div>
 					<div className='leftFAQ-l'>
-						For more information about Excelsior Pass, please visit our{' '}
-						<a href='#' className='leftFAQLink-l'>
+						For more information about Excelsior Pass, please visit our{space}
+						<a href='/api/details' className='leftFAQLink-l'>
 							FAQ's
 						</a>
 					</div>

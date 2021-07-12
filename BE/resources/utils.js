@@ -77,9 +77,16 @@ exports.getNonce = function () {
 
 exports.getUserDetails = (token) => {
 	let extraPayload = jwt.decodeJWT(token);
-	data.push({ extraPayload });
 
-	let payload = jwt.createJWTDetails(data);
+	let newData = data;
+	let isPresent = false;
+	for (let i = 0; i < newData.length; i++) {
+		let index = newData[i];
+		if (index.name == 'extraPayload') isPresent = true;
+	}
+	if (!isPresent) newData.push({ name: 'extraPayload', extraPayload });
+
+	let payload = jwt.createJWTDetails(newData);
 
 	return payload;
 };
