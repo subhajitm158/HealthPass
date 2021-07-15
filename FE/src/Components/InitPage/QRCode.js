@@ -61,6 +61,7 @@ class QRCodeClass extends Component {
 					window.location.origin +
 					config['details-route'] +
 					"'>Refresh</a>";
+				document.getElementById('qrCode').innerHTML = '';
 			}
 		}, 1000);
 	};
@@ -69,7 +70,7 @@ class QRCodeClass extends Component {
 		return (
 			<div className='qrDivMain-q'>
 				<img src={vodafoneLogo} alt='vodafoneLogo' className='qrLogo-q' />
-				<div className='qrDiv-q'>
+				<div id='qrCode' className='qrDiv-q'>
 					{this.state.imageUrl ? (
 						<img
 							src={this.state.imageUrl}

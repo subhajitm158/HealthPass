@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Header from './Header';
 import LeftPanel from './LeftPanel';
 import RightPanel from './RightPanel';
-import Footer from './Footer';
 import './Style/style.css';
 
 class FRender extends Component {
@@ -14,7 +13,6 @@ class FRender extends Component {
 					<LeftPanel />
 					<RightPanel />
 				</div>
-				<Footer />
 			</div>
 		);
 	}
