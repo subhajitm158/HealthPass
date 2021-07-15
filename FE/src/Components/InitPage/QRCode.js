@@ -20,7 +20,7 @@ class QRCodeClass extends Component {
 			.then((data) =>
 				this.setState({ data }, () => {
 					this.generateQR();
-				})
+				}),
 			);
 	}
 
@@ -46,7 +46,7 @@ class QRCodeClass extends Component {
 	};
 
 	timer = () => {
-		var deadline = new Date().getTime() + 0.1 * 60000;
+		var deadline = new Date().getTime() + config['timer-refresh'] * 60000;
 		var x = setInterval(function () {
 			var now = new Date().getTime();
 			var t = deadline - now;
