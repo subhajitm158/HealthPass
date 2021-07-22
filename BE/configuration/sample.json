@@ -1,0 +1,56 @@
+{
+	"message": "Credential created successfully",
+	"payload": {
+		"@context": ["https://www.w3.org/2018/credentials/v1"],
+		"id": "did:hpass:19b0cf0d5fc7017dd66ddd2374fbd9b796d988aced083d709abbaa0f7480b474:c4d1492e81bfcb951d028c0a4bd3c1edec16d32aed77a608c76ed917f3231f7e#vc-309b9234-7f7c-4a77-adbe-b1644efeeefe",
+		"type": ["VerifiableCredential"],
+		"issuer": "did:hpass:19b0cf0d5fc7017dd66ddd2374fbd9b796d988aced083d709abbaa0f7480b474:c4d1492e81bfcb951d028c0a4bd3c1edec16d32aed77a608c76ed917f3231f7e",
+		"issuanceDate": "2021-04-22T19:04:37Z",
+		"credentialSchema": {
+			"id": "did:hpass:19b0cf0d5fc7017dd66ddd2374fbd9b796d988aced083d709abbaa0f7480b474:c4d1492e81bfcb951d028c0a4bd3c1edec16d32aed77a608c76ed917f3231f7e;id=vaccinationcard;version=0.1",
+			"type": "JsonSchemaValidator2018"
+		},
+		"credentialSubject": {
+			"display": "green",
+			"history": [
+				{
+					"lotNumber": "679890",
+					"manufacturer": "PFizer",
+					"occurrenceDateTime": "2020-12-08",
+					"vaccine": "Pfizer-Biontech Covid-19 Vaccine",
+					"vaccineCode": "0001A"
+				}
+			],
+			"lotNumber": "12345",
+			"manufacturer": "PFizer",
+			"occurrenceDateTime": "2020-12-30",
+			"status": "completed",
+			"subject": {
+				"address": "1 main street",
+				"birthDate": "2000-10-10",
+				"email": "jane.smith@email.com",
+				"gender": "female",
+				"identity": [
+					{ "system": "acme-medical.com", "type": "MR", "value": "1234567890" },
+					{ "system": "acme-medical.com", "type": "MR", "value": "1234567890" },
+					{ "system": "travel.state.gov", "type": "PPN", "value": "AP12345F" },
+					{ "system": "www.dmv.ca.gov", "type": "DL", "value": "xx3456z" },
+					{ "system": "www.acme.com", "type": "OTH", "value": "XYZ123" }
+				],
+				"name": { "family": "Smith", "given": "Jane" },
+				"phone": "12345"
+			},
+			"targetDisease": "Covid-19",
+			"type": "Vaccination Card",
+			"vaccine": "Pfizer-Biontech Covid-19 Vaccine",
+			"vaccineCode": "0002A"
+		},
+		"proof": {
+			"created": "2021-04-22T19:04:37Z",
+			"creator": "did:hpass:19b0cf0d5fc7017dd66ddd2374fbd9b796d988aced083d709abbaa0f7480b474:c4d1492e81bfcb951d028c0a4bd3c1edec16d32aed77a608c76ed917f3231f7e#key-1",
+			"nonce": "01dd5e6d-4570-47f6-a95d-562b44243372",
+			"signatureValue": "MEUCIBYYsG8AZOwuQFAEwTm11d0E7YZPrmdmRNkV_4BfvaA6AiEAk7Wlie8WQzmXrJs12gcLvDGhU4WmUYHf-n8U_g2Wigk",
+			"type": "EcdsaSecp256r1Signature2019"
+		}
+	}
+}

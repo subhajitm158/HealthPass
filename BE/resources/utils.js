@@ -4,7 +4,8 @@ var crypto = require('crypto');
 const https = require('https');
 const config = require('../configuration/config.json');
 const jwt = require('./jwt.js');
-const data = require('../configuration/data.json');
+// const data = require('../configuration/data.json');
+const data = require('../configuration/sample.json');
 
 function generateTraceId() {
 	var id =
@@ -76,17 +77,20 @@ exports.getNonce = function () {
 };
 
 exports.getUserDetails = (token) => {
-	let extraPayload = jwt.decodeJWT(token);
+	// let extraPayload = [jwt.decodeJWT(token)];
 
-	let newData = data;
-	let isPresent = false;
-	for (let i = 0; i < newData.length; i++) {
-		let index = newData[i];
-		if (index.name == 'extraPayload') isPresent = true;
-	}
-	if (!isPresent) newData.push({ name: 'extraPayload', extraPayload });
+	// let newData = data;
+	// let isPresent = false;
+	// for (let i = 0; i < newData.length; i++) {
+	// 	let index = newData[i];
+	// 	if (index.name == 'extraPayload') isPresent = true;
+	// }
 
-	let payload = jwt.createJWTDetails(newData);
+	// if (!isPresent) {
+	// 	newData.push({ name: 'extraPayload', extraPayload });
+	// }
+
+	let payload = jwt.createJWTDetails(data);
 
 	return payload;
 };

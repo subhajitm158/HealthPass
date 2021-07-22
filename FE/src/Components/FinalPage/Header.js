@@ -34,7 +34,30 @@ class Header extends Component {
 			let dataDec = jwt.verify(this.state.encodedData, config['jwtKey'], {
 				algorithm: 'HS256',
 			});
-			this.setState({ data: dataDec });
+			this.setState({ data: dataDec }, () => {
+				this.setValues(dataDec);
+			});
+		} catch (err) {
+			console.error(err);
+		}
+	};
+
+	setValues = (dataDec) => {
+		try {
+			sessionStorage.setItem(
+				'Name',
+				dataDec.payload.credentialSubject.subject.name.given +
+					' ' +
+					dataDec.payload.credentialSubject.subject.name.family,
+			);
+			sessionStorage.setItem(
+				'DOB',
+				dataDec.payload.credentialSubject.subject.birthDate,
+			);
+			sessionStorage.setItem(
+				'PassExp',
+				dataDec.payload.credentialSubject.occurrenceDateTime,
+			);
 		} catch (err) {
 			console.error(err);
 		}
@@ -43,9 +66,7 @@ class Header extends Component {
 	render() {
 		return (
 			<div>
-				<h1>
-					Hi, {this.state.data.map((item) => item.Name)}. Here's your Pass.
-				</h1>
+				<h1>Hi, {sessionStorage.getItem('Name')}. Here's your Pass.</h1>
 				<p>
 					Your pass is now active. Be sure to save your pass before you leave.
 				</p>
