@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import jwt from 'jsonwebtoken';
 import axios from 'axios';
 import config from '../Configuration/config.json';
+import DecryptData from '../Encryption/Decryption';
+import EncryptData from '../Encryption/Encryption';
 
 class Header extends Component {
 	constructor() {
@@ -16,12 +18,12 @@ class Header extends Component {
 		axios
 			.get(config['details-route'], {
 				headers: {
-					'x-token-auth': sessionStorage.getItem('session'),
+					'x-token-auth': DecryptData(sessionStorage.getItem('session')),
 				},
 			})
 			.then((response) => {
 				this.setState({ encodedData: response.data }, () => {
-					this.decodeJWT();
+					this.setValues(this.decodeJWT());
 				});
 			})
 			.catch(function (error) {
@@ -34,9 +36,8 @@ class Header extends Component {
 			let dataDec = jwt.verify(this.state.encodedData, config['jwtKey'], {
 				algorithm: 'HS256',
 			});
-			this.setState({ data: dataDec }, () => {
-				this.setValues(dataDec);
-			});
+			this.setState({ data: dataDec }, () => {});
+			return dataDec;
 		} catch (err) {
 			console.error(err);
 		}
@@ -46,24 +47,35 @@ class Header extends Component {
 		try {
 			sessionStorage.setItem(
 				'Name',
-				dataDec.payload.credentialSubject.recipient.givenName +
-					' ' +
-					dataDec.payload.credentialSubject.recipient.middleName,
+				EncryptData(
+					dataDec.payload.credentialSubject.recipient.givenName +
+						' ' +
+						dataDec.payload.credentialSubject.recipient.middleName,
+				),
 			);
 			sessionStorage.setItem(
 				'DOB',
-				dataDec.payload.credentialSubject.recipient.birthDate,
+				EncryptData(dataDec.payload.credentialSubject.recipient.birthDate),
 			);
-			sessionStorage.setItem('PassExp', dataDec.payload.expirationDate);
+			sessionStorage.setItem(
+				'PassExp',
+				EncryptData(dataDec.payload.expirationDate),
+			);
 		} catch (err) {
 			console.error(err);
 		}
 	};
 
+	renderName = () => {
+		try {
+			return DecryptData(sessionStorage.getItem('Name'));
+		} catch (err) {}
+	};
+
 	render() {
 		return (
 			<div>
-				<h1>Hi, {sessionStorage.getItem('Name')}. Here's your Pass.</h1>
+				<h1>Hi, {this.renderName()}. Here's your Pass.</h1>
 				<p>
 					Your pass is now active. Be sure to save your pass before you leave.
 				</p>

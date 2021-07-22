@@ -4,6 +4,8 @@ import jwt from 'jsonwebtoken';
 import axios from 'axios';
 import config from '../Configuration/config.json';
 import dot from './Assets/dot.png';
+import DecryptData from '../Encryption/Decryption';
+import EncryptData from '../Encryption/Encryption';
 
 function LeftPanel() {
 	const [imageUrl, setImageUrl] = useState('');
@@ -21,7 +23,7 @@ function LeftPanel() {
 	const decodeJWT = () => {
 		try {
 			let dataDec = jwt.verify(
-				sessionStorage.getItem('Final-token'),
+				DecryptData(sessionStorage.getItem('Final-token')),
 				config['jwtKey'],
 				{
 					algorithm: 'HS256',
@@ -37,17 +39,41 @@ function LeftPanel() {
 		axios
 			.get(config['details-route'], {
 				headers: {
-					'x-token-auth': sessionStorage.getItem('session'),
+					'x-token-auth': DecryptData(sessionStorage.getItem('session')),
 				},
 			})
 			.then((response) => {
-				sessionStorage.setItem('Final-token', response.data);
+				sessionStorage.setItem('Final-token', EncryptData(response.data));
 				decodeJWT();
 			})
 			.catch(function (error) {
 				console.log(error);
 			});
 	});
+
+	const renderName = () => {
+		try {
+			return DecryptData(sessionStorage.getItem('Name'));
+		} catch (err) {}
+	};
+
+	const renderDOB = () => {
+		try {
+			return DecryptData(sessionStorage.getItem('DOB'));
+		} catch (err) {}
+	};
+
+	const renderPassExp1 = () => {
+		try {
+			return DecryptData(sessionStorage.getItem('PassExp')).substring(0, 10);
+		} catch (err) {}
+	};
+
+	const renderPassExp2 = () => {
+		try {
+			return DecryptData(sessionStorage.getItem('PassExp')).substring(11, 19);
+		} catch (err) {}
+	};
 
 	return (
 		<div>
@@ -57,7 +83,7 @@ function LeftPanel() {
 				</div>
 				{sessionStorage.getItem('session') ? (
 					<div>
-						<p className='leftName-l'>{sessionStorage.getItem('Name')}</p>
+						<p className='leftName-l'>{renderName()}</p>
 						<div className='leftQr-l'>
 							<img src={imageUrl} alt='qrCode' className='leftQRImg-l' />
 						</div>
@@ -73,14 +99,14 @@ function LeftPanel() {
 					<div>
 						<div className='leftDOB-l'>
 							<p className='leftDOBLabel-l'>D.O.B.</p>
-							<p className='leftDOBText-l'>{sessionStorage.getItem('DOB')}</p>
+							<p className='leftDOBText-l'>{renderDOB()}</p>
 						</div>
 						<div className='leftExp-l'>
 							<p className='leftExpLabel-l'>PASS EXPIRES</p>
 							<p className='leftExpText-l'>
-								{sessionStorage.getItem('PassExp').substring(0, 10) + ' '}
+								{renderPassExp1() + space}
 								<img src={dot} alt='dot' className='leftExpDot-l' />
-								{' ' + sessionStorage.getItem('PassExp').substring(11, 19)}
+								{space + renderPassExp2()}
 							</p>
 						</div>
 					</div>

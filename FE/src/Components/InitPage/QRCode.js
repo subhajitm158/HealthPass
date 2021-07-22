@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import vodafoneLogo from '../InitPage/Assets/vodafone-logo.png';
 import './Style/style.css';
 import config from '../Configuration/config.json';
+import EncryptData from '../Encryption/Encryption';
 
 class QRCodeClass extends Component {
 	constructor() {
@@ -28,7 +29,7 @@ class QRCodeClass extends Component {
 		try {
 			const imageUrl = await QRCode.toDataURL(this.state.data);
 			this.setState({ imageUrl });
-			sessionStorage.setItem('session', this.state.data);
+			sessionStorage.setItem('session', EncryptData(this.state.data));
 		} catch (error) {
 			console.error(error);
 		}
