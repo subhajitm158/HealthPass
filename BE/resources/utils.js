@@ -4,8 +4,7 @@ var crypto = require('crypto');
 const https = require('https');
 const config = require('../configuration/config.json');
 const jwt = require('./jwt.js');
-// const data = require('../configuration/data.json');
-const data = require('../configuration/sample.json');
+const data = require('../configuration/data.json');
 
 function generateTraceId() {
 	var id =

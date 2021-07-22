@@ -46,18 +46,15 @@ class Header extends Component {
 		try {
 			sessionStorage.setItem(
 				'Name',
-				dataDec.payload.credentialSubject.subject.name.given +
+				dataDec.payload.credentialSubject.recipient.givenName +
 					' ' +
-					dataDec.payload.credentialSubject.subject.name.family,
+					dataDec.payload.credentialSubject.recipient.middleName,
 			);
 			sessionStorage.setItem(
 				'DOB',
-				dataDec.payload.credentialSubject.subject.birthDate,
+				dataDec.payload.credentialSubject.recipient.birthDate,
 			);
-			sessionStorage.setItem(
-				'PassExp',
-				dataDec.payload.credentialSubject.occurrenceDateTime,
-			);
+			sessionStorage.setItem('PassExp', dataDec.payload.expirationDate);
 		} catch (err) {
 			console.error(err);
 		}

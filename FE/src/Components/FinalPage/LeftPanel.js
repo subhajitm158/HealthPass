@@ -3,6 +3,7 @@ import QRCode from 'qrcode';
 import jwt from 'jsonwebtoken';
 import axios from 'axios';
 import config from '../Configuration/config.json';
+import dot from './Assets/dot.png';
 
 function LeftPanel() {
 	const [imageUrl, setImageUrl] = useState('');
@@ -77,7 +78,9 @@ function LeftPanel() {
 						<div className='leftExp-l'>
 							<p className='leftExpLabel-l'>PASS EXPIRES</p>
 							<p className='leftExpText-l'>
-								{sessionStorage.getItem('PassExp')}
+								{sessionStorage.getItem('PassExp').substring(0, 10) + ' '}
+								<img src={dot} alt='dot' className='leftExpDot-l' />
+								{' ' + sessionStorage.getItem('PassExp').substring(11, 19)}
 							</p>
 						</div>
 					</div>
