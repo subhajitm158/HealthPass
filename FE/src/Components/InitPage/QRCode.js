@@ -21,7 +21,7 @@ class QRCodeClass extends Component {
 			.then((data) =>
 				this.setState({ data }, () => {
 					this.generateQR();
-				}),
+				})
 			);
 	}
 
@@ -60,7 +60,7 @@ class QRCodeClass extends Component {
 				document.getElementById('exp-timer').innerHTML =
 					"QR Code expired. <a href='" +
 					window.location.origin +
-					config['details-route'] +
+					config['details-fe-route'] +
 					"'>Refresh</a>";
 				document.getElementById('qrCode').innerHTML = '';
 			}
