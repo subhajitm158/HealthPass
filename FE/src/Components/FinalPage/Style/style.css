@@ -11,7 +11,7 @@
 }
 
 .leftBckImg-l {
-	background-image: url(../Assets/statue.png);
+	background-image: url(../Assets/main-image.png);
 	background-repeat: no-repeat;
 	background-size: 100% 500px;
 	height: 500px;
@@ -25,15 +25,15 @@
 	background-color: white;
 	height: 30px;
 	width: 250px;
-	margin-top: 50px;
-	margin-left: -10px;
+	margin-top: 120px;
+	margin-left: 470px;
 	border-radius: 7px;
 }
 
 .lefttagText-l {
 	font-weight: 700;
 	font-size: 18px;
-	color: #85a0c7;
+	color: #543a29;
 	margin-top: 3px;
 	margin-left: 30px;
 }
@@ -42,10 +42,10 @@
 	position: absolute;
 	height: 30px;
 	width: 300px;
-	margin-top: 100px;
-	margin-left: 20px;
-	font-size: 23px;
-	font-weight: 500;
+	margin-top: 105px;
+	margin-left: 50px;
+	font-size: 40px;
+	font-weight: 700;
 	color: white;
 }
 
@@ -53,16 +53,16 @@
 	position: absolute;
 	height: 270px;
 	width: 300px;
-	margin-top: 150px;
-	margin-left: 20px;
+	margin-top: 165px;
+	margin-left: 50px;
 }
 
 .leftText-l {
 	position: absolute;
 	height: 40px;
 	width: 400px;
-	margin-top: 440px;
-	margin-left: 20px;
+	margin-top: 457px;
+	margin-left: 50px;
 }
 
 .leftTexttxt-l {
@@ -77,7 +77,7 @@
 	height: 50px;
 	width: 250px;
 	margin-top: 190px;
-	margin-left: 350px;
+	margin-left: 400px;
 }
 
 .leftExp-l {
@@ -85,7 +85,7 @@
 	height: 50px;
 	width: 250px;
 	margin-top: 310px;
-	margin-left: 350px;
+	margin-left: 400px;
 }
 
 .leftDOBLabel-l {
@@ -124,6 +124,8 @@
 }
 
 .leftPrintButton-l {
+	text-decoration: none;
+	border-radius: 15px;
 	position: absolute;
 	height: 50px;
 	width: 300px;
@@ -145,7 +147,7 @@
 	border: none;
 	border-radius: 15px;
 	color: white;
-	background-color: #85a0c7;
+	background-color: #543a29;
 	height: 100%;
 	width: 100%;
 	cursor: pointer;

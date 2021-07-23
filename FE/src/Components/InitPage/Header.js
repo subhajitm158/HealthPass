@@ -10,7 +10,7 @@ class Header extends Component {
 					<img src={headerLogo} alt='headerLogo' className='hLogo-h' />
 				</div>
 				<div className='navbar-h'>
-					<h3 className='navbarText-h'>Liberty HealthPass</h3>
+					<h3 className='navbarText-h'>Good Health Pass</h3>
 				</div>
 			</div>
 		);
