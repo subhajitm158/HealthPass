@@ -1,5 +1,8 @@
 #HealthPass Details
 -------------------
+
+This repository is all about doing Experiments on HealthPass and making this app more functionally stable and more redundant.
+
 #Configuring PORT for Backend
 -----------------------------
 Configuration for Backend should be done in this file :- \BE\configuration\config.json
