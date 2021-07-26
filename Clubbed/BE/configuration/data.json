@@ -1,0 +1,43 @@
+{
+	"message": "Credential created successfully",
+	"payload": {
+		"@context": ["https://www.w3.org/2018/credentials/v1"],
+		"id": "did:hpass:19b0cf0d5fc7017dd66ddd2374fbd9b796d988aced083d709abbaa0f7480b474:c4d1492e81bfcb951d028c0a4bd3c1edec16d32aed77a608c76ed917f3231f7e#vc-b55d89a7-a732-4ea0-84eb-b3d011926557",
+		"type": ["VerifiableCredential", "GoodHealthPass", "TestCredential"],
+		"issuer": "did:hpass:19b0cf0d5fc7017dd66ddd2374fbd9b796d988aced083d709abbaa0f7480b474:c4d1492e81bfcb951d028c0a4bd3c1edec16d32aed77a608c76ed917f3231f7e",
+		"issuanceDate": "2021-07-06T12:23:41Z",
+		"expirationDate": "2021-12-31T00:00:00Z",
+		"credentialSchema": {
+			"id": "did:hpass:19b0cf0d5fc7017dd66ddd2374fbd9b796d988aced083d709abbaa0f7480b474:c4d1492e81bfcb951d028c0a4bd3c1edec16d32aed77a608c76ed917f3231f7e;id=ghp-vaccination-credential;version=0.4",
+			"type": "JsonSchemaValidator2018"
+		},
+		"credentialSubject": {
+			"batchNumber": "12345",
+			"countryOfVaccination": "us",
+			"dateOfVaccination": "2020-12-30",
+			"disease": "COVID-19",
+			"display": "#32CD32",
+			"doseNumber": 2,
+			"dosesPerCycle": 2,
+			"marketingAuthorizationHolder": "PFizer-Biontech",
+			"medicinalProductCode": "EU/1/20/1528",
+			"medicinalProductName": "Comirnaty",
+			"recipient": {
+				"birthDate": "2000-10-10",
+				"familyName": "Smith",
+				"givenName": "Jane",
+				"middleName": "Sarah"
+			},
+			"stateOfVaccination": "ca",
+			"type": "Vaccination Card",
+			"vaccineType": "208"
+		},
+		"proof": {
+			"created": "2021-07-06T12:23:41Z",
+			"creator": "did:hpass:19b0cf0d5fc7017dd66ddd2374fbd9b796d988aced083d709abbaa0f7480b474:c4d1492e81bfcb951d028c0a4bd3c1edec16d32aed77a608c76ed917f3231f7e#key-1",
+			"nonce": "1998c5b8-3747-4f0d-b53f-6ae95107644e",
+			"signatureValue": "MEQCIBeU8dnouQTizbBcBAgilQp5Iy7DoLnvnV0-uhkEMnP7AiB0Iwp5UkEWSQaeoxgvJcqme50oDj6Hz9zimJdqh67yEw",
+			"type": "EcdsaSecp256r1Signature2019"
+		}
+	}
+}
