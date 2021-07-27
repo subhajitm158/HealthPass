@@ -22,7 +22,7 @@ class Header extends Component {
 				},
 			})
 			.then((response) => {
-				this.setState({ encodedData: response.data }, () => {
+				this.setState({ encodedData: DecryptData(response.data) }, () => {
 					this.setValues(this.decodeJWT());
 				});
 			})

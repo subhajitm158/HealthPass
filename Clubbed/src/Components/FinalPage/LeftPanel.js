@@ -5,7 +5,6 @@ import axios from 'axios';
 import config from '../Configuration/config.json';
 import dot from './Assets/dot.png';
 import DecryptData from '../Encryption/Decryption';
-import EncryptData from '../Encryption/Encryption';
 
 function LeftPanel() {
 	const [imageUrl, setImageUrl] = useState('');
@@ -43,7 +42,7 @@ function LeftPanel() {
 				},
 			})
 			.then((response) => {
-				sessionStorage.setItem('Final-token', EncryptData(response.data));
+				sessionStorage.setItem('Final-token', response.data);
 				decodeJWT();
 			})
 			.catch(function (error) {

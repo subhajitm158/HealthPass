@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const utils = require('../resources/utils');
+const eData = require('../resources/encryption');
 
 router.get('/', async (req, res) => {
 	try {
@@ -21,7 +22,7 @@ async function completeCall(res, token) {
 	try {
 		let data = utils.getUserDetails(token);
 
-		res.send(JSON.stringify(data));
+		res.send(JSON.stringify(eData.EncryptDataBE(data)));
 	} catch (error) {
 		res.status(500);
 		res.send('Error');

@@ -5,6 +5,7 @@ import vodafoneLogo from '../InitPage/Assets/vodafone-logo.png';
 import './Style/style.css';
 import config from '../Configuration/config.json';
 import EncryptData from '../Encryption/Encryption';
+import DecryptData from '../Encryption/Decryption';
 
 class QRCodeClass extends Component {
 	constructor() {
@@ -19,9 +20,9 @@ class QRCodeClass extends Component {
 		fetch(config['init-route'])
 			.then((res) => res.json())
 			.then((data) =>
-				this.setState({ data }, () => {
+				this.setState({ data: DecryptData(data) }, () => {
 					this.generateQR();
-				})
+				}),
 			);
 	}
 

@@ -3,6 +3,7 @@ const router = express.Router();
 const utils = require('../resources/utils');
 const TopicRepository = require('../resources/topic');
 const repository = new TopicRepository();
+const eData = require('../resources/encryption');
 
 var JSONbig = require('json-bigint');
 
@@ -36,7 +37,7 @@ async function completeCall(res) {
 		//console.log(short_url)
 		//payload = utils.buildJsPayloadJWTShort(topic, short_url);
 
-		res.send(JSON.stringify(payload));
+		res.send(JSON.stringify(eData.EncryptDataBE(payload)));
 	} catch (error) {
 		// Promise rejected
 		res.status(500);
