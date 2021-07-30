@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  backend:
+    env_file:
+        "./.env"
+    build:
+      context: ./BE
+      dockerfile: ./Dockerfile    
+    ports:
+      - "3002:3002"
+  frontend:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile    
+    ports:
+      - "3000:3000"
+    links:
+      - "backend:be"
