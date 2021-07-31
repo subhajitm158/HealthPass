@@ -1,0 +1,17 @@
+{
+	"init-Route": "/be/api",
+	"details-Route": "/be/api/details",
+	"auth-Route": "/be/api/auth",
+	"gclUrl": "dev.api.ddi.id.vodafone.com",
+	"secretToken": "secret token for vodafone id example login api",
+	"serviceDidAddress": "did:erc725:17Ee9A3E7F641463115B73734780230EDbbCE933",
+	"serviceContract": "0x17Ee9A3E7F641463115B73734780230EDbbCE933",
+	"returnUrl": "https://pizza.demo.ddi.id.vodafone.com/data",
+	"verifiableCredentialListMandatory": ["CLAIM_FIRST_NAME", "CLAIM_LAST_NAME"],
+	"verifiableCredentialListOptional": ["CLAIM_GENDER"],
+	"GCLLoginUrl": "https://dev.api.ddi.id.vodafone.com/",
+	"GCLLoginUrlVanilla": "https://dev.api.ddi.id.vodafone.com/",
+	"serviceName": "Health Pass",
+	"jwtKey": "AjHE*f~4%V==nJz0tv(4m2jLJ75z!&<S",
+	"jwtExpSeconds": "300"
+}

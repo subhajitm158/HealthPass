@@ -1,0 +1,8 @@
+{
+	"jwtKey": "AjHE*f~4%V==nJz0tv(4m2jLJ75z!&<S",
+	"init-route": "/be/api",
+	"details-route": "/be/api/details",
+	"init-fe-route": "/api",
+	"details-fe-route": "/api/details",
+	"timer-refresh": "0.1"
+}
