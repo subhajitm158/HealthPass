@@ -1,0 +1,14 @@
+{
+	"api": "https://dev1.wh-hpass.dev.watson-health.ibm.com/api/v1/hpass",
+	"init-route": "/be/api",
+	"details-route": "/be/api/details",
+	"init-fe-route": "/api",
+	"details-fe-route": "/api/details",
+	"login-route": "/users/login",
+	"qr-route": "/credentials",
+	"timer-refresh": "0.1",
+	"MY_EMAIL": "hpassadmin@poc.com",
+	"MY_PASSWORD": "testing123",
+	"jwtKey": "AjHE*f~4%V==nJz0tv(4m2jLJ75z!&<S",
+	"x-hpass-issuer-id": "hpass.issuer1"
+}
