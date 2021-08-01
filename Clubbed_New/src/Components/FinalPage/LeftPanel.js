@@ -19,16 +19,19 @@ function LeftPanel() {
 	useEffect(() => {
 		async function fetchData() {
 			const returnData = await CallDetailsLoginApi();
+			console.log(returnData);
 			const returnqr = await CallDetailsQRApi(returnData);
+			const imgurl = await generateQR(JSON.stringify(returnqr));
+			setImageUrl(imgurl);
 			console.log(returnqr);
-			// const imageData = await generateQR(returnData.data);
-			// setImageUrl(imageData);
-			// const Name = await GetName(returnData.data);
-			// setName(Name);
-			// const DOB = await GetDateofBirth(returnData.data);
-			// setDOB(DOB);
-			// const exp = await GetPassExpirationDate(returnData.data);
-			// setPassExp(exp);
+			const imageData = await generateQR(JSON.stringify(returnqr));
+			setImageUrl(imageData);
+			const Name = await GetName(returnqr);
+			setName(Name);
+			const DOB = await GetDateofBirth(returnqr);
+			setDOB(DOB);
+			const exp = await GetPassExpirationDate(returnqr);
+			setPassExp(exp);
 		}
 
 		fetchData();

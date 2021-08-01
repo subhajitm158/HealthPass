@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { CallDetailsApi, GetName } from '../API_Calls/details';
+import {
+	CallDetailsLoginApi,
+	CallDetailsQRApi,
+	GetName,
+} from '../API_Calls/details';
 
 class Header extends Component {
 	constructor() {
@@ -10,6 +14,10 @@ class Header extends Component {
 	}
 
 	async componentDidMount() {
+		const returnData = await CallDetailsLoginApi();
+		const returnqr = await CallDetailsQRApi(returnData);
+		const Name = await GetName(returnqr);
+		this.setState({ name: Name });
 		// const returnData = await CallDetailsApi();
 		// const Name = await GetName(returnData.data);
 		// this.setState({ name: Name });

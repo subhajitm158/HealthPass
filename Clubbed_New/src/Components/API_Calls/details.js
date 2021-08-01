@@ -2,6 +2,7 @@ import QRCode from 'qrcode';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
 import config from '../Configuration/config.json';
+import body from './body.json';
 
 export async function CallDetailsLoginApi() {
 	return fetch(config['login-route'], {
@@ -21,46 +22,19 @@ export async function CallDetailsLoginApi() {
 }
 
 export async function CallDetailsQRApi(auth_token) {
-	return fetch(config['qr-route'] + '?output=qrcode', {
+	return fetch(config['qr-route'] + '?type=', {
+		// return fetch(config['qr-route'] + '?output=qrcode', {
 		method: 'POST',
-		params: {
-			output: 'qrcode',
-		},
 		headers: {
 			'Content-Type': 'application/json',
 			'x-hpass-issuer-id': config['x-hpass-issuer-id'],
-			Authorization: auth_token,
+			Authorization: auth_token.token_type + ' ' + auth_token.access_token,
 		},
-		body: JSON.stringify({
-			schemaID:
-				'did:hpass:19b0cf0d5fc7017dd66ddd2374fbd9b796d988aced083d709abbaa0f7480b474:c4d1492e81bfcb951d028c0a4bd3c1edec16d32aed77a608c76ed917f3231f7e;id=ghp-vaccination-credential;version=0.4',
-			type: ['VerifiableCredential', 'GoodHealthPass', 'VaccinationCredential'],
-			data: {
-				type: 'Vaccination Card',
-				display: '#32CD32',
-				recipient: {
-					givenName: 'Jane',
-					middleName: 'Sarah',
-					familyName: 'Smith',
-					birthDate: '2000-10-10',
-				},
-				disease: 'COVID-19',
-				medicinalProductName: 'Comirnaty',
-				medicinalProductCode: 'EU/1/20/1528',
-				vaccineType: '208',
-				marketingAuthorizationHolder: 'PFizer-Biontech',
-				dateOfVaccination: '2020-12-30',
-				doseNumber: 2,
-				dosesPerCycle: 2,
-				batchNumber: '12345',
-				stateOfVaccination: 'ca',
-				countryOfVaccination: 'us',
-			},
-			expirationDate: '2021-12-31T00:00:00Z',
-		}),
+		body: JSON.stringify(body),
 	})
 		.then((res) => res.json())
 		.then((data) => {
+			console.log(`data ${data}`);
 			return data;
 		});
 }
@@ -95,13 +69,12 @@ export async function decodeJWT(data) {
 
 export async function GetName(data) {
 	try {
-		const decodedPayload = await decodeJWT(data);
 		return (
-			decodedPayload.payload.credentialSubject.recipient.givenName +
+			data.payload.credentialSubject.recipient.givenName +
 			' ' +
-			decodedPayload.payload.credentialSubject.recipient.middleName +
+			data.payload.credentialSubject.recipient.middleName +
 			' ' +
-			decodedPayload.payload.credentialSubject.recipient.familyName
+			data.payload.credentialSubject.recipient.familyName
 		);
 	} catch (err) {
 		console.error(err);
@@ -110,8 +83,7 @@ export async function GetName(data) {
 
 export async function GetDateofBirth(data) {
 	try {
-		const decodedPayload = await decodeJWT(data);
-		return decodedPayload.payload.credentialSubject.recipient.birthDate;
+		return data.payload.credentialSubject.recipient.birthDate;
 	} catch (err) {
 		console.error(err);
 	}
@@ -119,8 +91,7 @@ export async function GetDateofBirth(data) {
 
 export async function GetPassExpirationDate(data) {
 	try {
-		const decodedPayload = await decodeJWT(data);
-		return decodedPayload.payload.expirationDate;
+		return data.payload.expirationDate;
 	} catch (err) {
 		console.error(err);
 	}

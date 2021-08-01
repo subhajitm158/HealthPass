@@ -12,7 +12,7 @@ module.exports = function (app) {
 	);
 
 	app.use(
-		config['qr-route'] + '?output=qrcode',
+		config['qr-route'],
 		createProxyMiddleware({
 			target: config['api'],
 			secure: false,
