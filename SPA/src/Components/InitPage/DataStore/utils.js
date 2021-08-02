@@ -22,12 +22,12 @@ export async function generateTopic() {
 		'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 	for (let i = 0; i < 10; i++)
 		text += possible.charAt(Math.floor(Math.random() * possible.length));
-
+	console.log(text);
 	return text;
 }
 
 export async function buildJsPayloadJWT(topic, nonce, authId) {
-	var jwt_token = createJWT(nonce, authId, topic);
+	var jwt_token = createJWT(topic, nonce, authId);
 
 	return jwt_token;
 }

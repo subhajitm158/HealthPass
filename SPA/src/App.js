@@ -4,8 +4,6 @@ import InitPage from './Components/InitPage/render';
 import FinalRender from './Components/FinalPage/render';
 import './App.css';
 
-export const MContext = React.createContext();
-
 const App = () => {
 	return (
 		<div>

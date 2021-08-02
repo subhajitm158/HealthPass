@@ -5,16 +5,26 @@ import QrCode from './QRCode';
 import Footer from './Footer';
 import './Style/style.css';
 import { Redirect } from 'react-router-dom';
+import { CallInitApi } from '../API_Calls/init';
+import TopicRepository from '../Configuration/topic';
+import { getTopic, validateTopic } from '../Configuration/managetopic';
+const repository = new TopicRepository();
 
 const InitPage = () => {
 	let timer = null;
 	const [presentData, setPresentData] = useState('');
 
-	const processResponse = (result) => {
-		if (result !== 'undefined') {
-			if (result.data === 'true') {
+	const processResponse = async (result) => {
+		if (result !== undefined) {
+			if (result.topic !== undefined) {
+				clearInterval(timer);
+				timer = null;
 				console.log('redirecting...');
-				setPresentData(result.data);
+				console.log(result.topic);
+				const topicStored = await getTopic(result.topic);
+				console.log(`topic Stored 2 ${topicStored}`);
+				console.log(await validateTopic(result.topic));
+				// setPresentData(result.data);
 			} else {
 				console.log('caught else of ok case');
 			}
@@ -23,24 +33,17 @@ const InitPage = () => {
 		}
 	};
 
-	const getItems = () => {
-		fetch('/be/api/auth', {
-			method: 'get',
-			headers: { 'Content-Type': 'application/json' },
-		})
-			.then((resp) => resp.json())
-			.then((result) => processResponse(result));
+	const getItems = async () => {
+		const returnData = await CallInitApi();
+		processResponse(returnData);
 	};
 
 	useEffect(() => {
-		// Call Listener
-		// eslint-disable-next-line
-		// timer = setInterval(() => getItems(), 2000);
-		// return () => {
-		// 	// Remove Listener
-		// 	clearInterval(timer);
-		// 	timer = null;
-		// };
+		timer = setInterval(() => getItems(), 2000);
+		return () => {
+			clearInterval(timer);
+			timer = null;
+		};
 	}, []);
 
 	return presentData ? (

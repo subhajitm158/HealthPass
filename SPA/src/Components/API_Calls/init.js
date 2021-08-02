@@ -3,7 +3,8 @@ import config from '../Configuration/config.json';
 import jwt from 'jsonwebtoken';
 
 export async function CallInitApi() {
-	return fetch(config['init-route'])
+	// return fetch(config['init-route'])
+	return fetch('/be/poll')
 		.then((res) => res.json())
 		.then((data) => {
 			return data;

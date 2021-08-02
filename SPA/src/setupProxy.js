@@ -28,4 +28,13 @@ module.exports = function (app) {
 			changeOrigin: true,
 		}),
 	);
+
+	app.use(
+		'/be/poll',
+		createProxyMiddleware({
+			target: 'http://localhost:5002',
+			secure: false,
+			changeOrigin: true,
+		}),
+	);
 };
