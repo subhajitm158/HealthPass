@@ -65,7 +65,9 @@ function LeftPanel() {
 							<p className='leftExpLabel-l'>PASS EXPIRES</p>
 							<p className='leftExpText-l'>
 								{passExp.substring(0, 10) + space}
-								<img src={dot} alt='dot' className='leftExpDot-l' />
+								{passExp ? (
+									<img src={dot} alt='dot' className='leftExpDot-l' />
+								) : null}
 								{space + passExp.substring(11, passExp.length - 1)}
 							</p>
 						</div>
