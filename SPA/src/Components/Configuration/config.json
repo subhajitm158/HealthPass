@@ -1,0 +1,21 @@
+{
+	"api": "https://dev1.wh-hpass.dev.watson-health.ibm.com/api/v1/hpass",
+	"gclUrl": "https://dev.api.ddi.id.vodafone.com:443",
+	"init-route": "/be/api",
+	"details-route": "/be/api/details",
+	"init-fe-route": "/api",
+	"details-fe-route": "/api/details",
+	"login-route": "/users/login",
+	"qr-route": "/credentials",
+	"nonce-route": "/nonce",
+	"timer-refresh": "0.1",
+	"MY_EMAIL": "hpassadmin@poc.com",
+	"MY_PASSWORD": "testing123",
+	"jwtKey": "AjHE*f~4%V==nJz0tv(4m2jLJ75z!&<S",
+	"x-hpass-issuer-id": "hpass.issuer1",
+	"serviceDidAddress": "did:erc725:17Ee9A3E7F641463115B73734780230EDbbCE933",
+	"serviceName": "Health Pass",
+	"verifiableCredentialListMandatory": ["CLAIM_FIRST_NAME", "CLAIM_LAST_NAME"],
+	"verifiableCredentialListOptional": ["CLAIM_GENDER"],
+	"returnUrl": "https://api.ddi.id.vodafone.com/profileType"
+}
