@@ -39,11 +39,11 @@ const InitPage = () => {
 	};
 
 	useEffect(() => {
-		timer = setInterval(() => getItems(), 2000);
-		return () => {
-			clearInterval(timer);
-			timer = null;
-		};
+		// timer = setInterval(() => getItems(), 2000);
+		// return () => {
+		// 	clearInterval(timer);
+		// 	timer = null;
+		// };
 	}, []);
 
 	return presentData ? (
