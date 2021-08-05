@@ -26,10 +26,17 @@ class Header extends Component {
 	render() {
 		return (
 			<div>
-				<h1>Hi, {this.state.name}. Here's your Pass.</h1>
-				<p>
-					Your pass is now active. Be sure to save your pass before you leave.
-				</p>
+				{this.state.name ? (
+					<div>
+						<h1>Hi, {this.state.name}. Here's your Pass.</h1>
+						<p>
+							Your pass is now active. Be sure to save your pass before you
+							leave.
+						</p>
+					</div>
+				) : (
+					<h1>Loading...</h1>
+				)}
 			</div>
 		);
 	}

@@ -22,8 +22,6 @@ function LeftPanel() {
 			const returnqr = await CallDetailsQRApi(returnData);
 			const imgurl = await generateQR(JSON.stringify(returnqr));
 			setImageUrl(imgurl);
-			const imageData = await generateQR(JSON.stringify(returnqr));
-			setImageUrl(imageData);
 			const Name = await GetName(returnqr);
 			setName(Name);
 			const DOB = await GetDateofBirth(returnqr);
@@ -41,7 +39,7 @@ function LeftPanel() {
 				<div className='lefttag-l'>
 					<p className='lefttagText-l'>Covid-19 Vaccination</p>
 				</div>
-				{sessionStorage.getItem('session') ? (
+				{name && dob && passExp ? (
 					<div>
 						<p className='leftName-l'>{name}</p>
 						<div className='leftQr-l'>
@@ -55,7 +53,7 @@ function LeftPanel() {
 						Verification.
 					</p>
 				</div>
-				{sessionStorage.getItem('session') ? (
+				{name && dob && passExp ? (
 					<div>
 						<div className='leftDOB-l'>
 							<p className='leftDOBLabel-l'>D.O.B.</p>

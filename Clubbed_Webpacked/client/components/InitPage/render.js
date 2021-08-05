@@ -23,13 +23,13 @@ const InitPage = () => {
 			if (result.topic !== undefined) {
 				clearInterval(timer);
 				timer = null;
-				console.log('redirecting...');
-				console.log(result.topic);
-				const isValid = await validateTopic(result.topic);
-				if (isValid) {
-					await deleteTopic();
-					setPresentData(result.data);
-				}
+				// console.log('redirecting...');
+				// console.log(result.topic);
+				// const isValid = await validateTopic(result.topic);
+				// if (isValid) {
+				// 	await deleteTopic();
+				// 	setPresentData(result.data);
+				// }
 			} else {
 				console.log('caught else of ok case');
 			}
@@ -40,6 +40,7 @@ const InitPage = () => {
 
 	const getItems = async () => {
 		const returnData = await CallInitApi();
+		console.log(returnData);
 		processResponse(returnData);
 	};
 

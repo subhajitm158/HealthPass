@@ -8,7 +8,8 @@ let data = {
 router.post('/', async (req, res) => {
 	try {
 		data = req.body;
-		res.send(req.body);
+		// res.send(req.body);
+		// Store data in redis
 	} catch (err) {
 		console.error(err);
 		res.send(500).send('Server Error');

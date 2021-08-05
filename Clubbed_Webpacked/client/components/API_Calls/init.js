@@ -14,7 +14,6 @@ export async function CallInitApi() {
 export async function generateQR(data) {
 	try {
 		const imageUrl = await QRCode.toDataURL(data);
-		sessionStorage.setItem('session', data);
 		return imageUrl;
 	} catch (error) {
 		console.error(error);
