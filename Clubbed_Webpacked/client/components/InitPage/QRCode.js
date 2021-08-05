@@ -7,18 +7,21 @@ import { generateQR } from '../API_Calls/init';
 import { CompleteCall } from './DataStore/init';
 
 class QRCodeClass extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
 			imageUrl: '',
 		};
+		this.props = props;
 	}
 
 	async componentDidMount() {
-		const returnData = await CompleteCall();
+		const returnData = await CompleteCall(this.props.ws.requestId);
 		// const returnData = await CallInitApi();
+		console.log('returnData passed for QR generation:', returnData);
 		const imageData = await generateQR(returnData);
 		this.setState({ imageUrl: imageData });
+		console.log('props', this.props);
 	}
 
 	timer() {

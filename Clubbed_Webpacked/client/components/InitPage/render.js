@@ -7,6 +7,7 @@ import './Style/style.css';
 import { Redirect } from 'react-router-dom';
 import { CallInitApi } from '../API_Calls/init';
 import TopicRepository from '../Configuration/topic';
+import { v4 as uuidv4 } from 'uuid';
 import {
 	deleteTopic,
 	getTopic,
@@ -16,6 +17,9 @@ const repository = new TopicRepository();
 
 const InitPage = () => {
 	let timer = null;
+	const requestId = uuidv4();
+	const ws = new WebSocket('ws://localhost:3000');
+	ws.requestId = requestId;
 	const [presentData, setPresentData] = useState('');
 
 	const processResponse = async (result) => {
@@ -45,7 +49,30 @@ const InitPage = () => {
 	};
 
 	useEffect(() => {
-		timer = setInterval(() => getItems(), 2000);
+		// timer = setInterval(() => getItems(), 2000);
+
+		ws.onopen = () => {
+			// on connecting, do nothing but log it to the console
+			console.log('connected');
+		};
+		ws.onclose(requestId, (wq) => {});
+		ws.onmessage = (evt) => {
+			// listen to data sent from the websocket server
+			const message = JSON.parse(evt.data);
+			// this.setState({ dataFromServer: message });
+			console.log(message);
+		};
+		ws.onclose(requestId, (data) => {
+			console.log(
+				'------------------------- DATA FROM WS SERVER =======================',
+			);
+			console.log(data);
+		});
+		ws.onclose = () => {
+			console.log('disconnected');
+			// automatically try to reconnect on connection loss
+		};
+
 		return () => {
 			clearInterval(timer);
 			timer = null;
@@ -58,7 +85,7 @@ const InitPage = () => {
 		<div className='renderInit-r'>
 			<Header />
 			<Body />
-			<QrCode />
+			<QrCode ws={ws} />
 			<Footer />
 		</div>
 	);

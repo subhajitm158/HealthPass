@@ -3,7 +3,7 @@ import TopicRepository from '../../Configuration/topic';
 import { addTopic, getTopic, setTopic } from '../../Configuration/managetopic';
 const repository = new TopicRepository();
 
-export async function CompleteCall() {
+export async function CompleteCall(requestId) {
 	const http_promise = 12376186318632871682736;
 	// const http_promise = await getNonce();
 
@@ -14,6 +14,6 @@ export async function CompleteCall() {
 	await setTopic(topic);
 	await addTopic();
 
-	let payload = buildJsPayloadJWT(topic, nonce, authId);
+	let payload = buildJsPayloadJWT(topic, nonce, authId, requestId);
 	return payload;
 }

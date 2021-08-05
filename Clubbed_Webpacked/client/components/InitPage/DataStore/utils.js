@@ -40,8 +40,8 @@ export async function generateTopic() {
 	return text;
 }
 
-export async function buildJsPayloadJWT(topic, nonce, authId) {
-	var jwt_token = createJWT(topic, nonce, authId);
+export async function buildJsPayloadJWT(topic, nonce, authId, requestId) {
+	var jwt_token = createJWT(topic, nonce, authId, requestId);
 
 	return jwt_token;
 }
@@ -56,7 +56,7 @@ function generateTraceId() {
 	return id;
 }
 
-function createJWT(topic, nonce, authId) {
+function createJWT(topic, nonce, authId, requestId) {
 	var payload = {
 		serviceName: config.serviceName,
 		serviceDid: config.serviceDidAddress,
@@ -69,7 +69,7 @@ function createJWT(topic, nonce, authId) {
 		nonce: nonce,
 		authorizationId: authId,
 		gclLoginUrl: config.api + config['login-route'],
-		returnUrl: config.returnUrl,
+		returnUrl: `${config.returnUrl}?requestId=${requestId}`,
 		topic: topic,
 	};
 	var token = jwt.sign(JSON.stringify(payload), Buffer.from(config.jwtKey), {

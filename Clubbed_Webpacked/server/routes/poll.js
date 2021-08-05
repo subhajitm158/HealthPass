@@ -6,8 +6,12 @@ let data = {
 };
 
 router.post('/', async (req, res) => {
+	// create server
 	try {
 		data = req.body;
+		const requestId = req.query.requestId;
+		// req.rawListeners.emit(requestId, data);
+		req.wss.emit('123456', { status: 'ok' });
 		// res.send(req.body);
 		// Store data in redis
 	} catch (err) {
