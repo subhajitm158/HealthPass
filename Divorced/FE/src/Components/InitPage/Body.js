@@ -1,25 +1,29 @@
 import React, { Component } from 'react';
 import mainLogo from '../InitPage/Assets/main-logo.png';
-import './Style/style.css';
 
 class Body extends Component {
 	render() {
 		return (
 			<div>
-				<div className='bodyMain-b'>
-					<img src={mainLogo} alt='mainLogo' className='mLogo-b' />
+				<div style={{ textAlign: 'center', height: 'auto' }}>
+					<img
+						src={mainLogo}
+						alt='mainLogo'
+						className='img-fluid'
+						style={{
+							height: '90px',
+						}}
+					/>
 				</div>
-				<br />
-				<br />
-				<div className='textDiv-b'>
-					<h2 className='textH2-b'>Connect to your Wallet</h2>
-					<p className='textP-b'>
+				<div style={{ marginLeft: '200px', marginRight: '200px' }}>
+					<h2 className='display-4' style={{ fontSize: '30px' }}>
+						Connect to your Wallet
+					</h2>
+					<p className='text-justify text-muted' style={{ fontSize: '15px' }}>
 						From your Vodafone Wallet, scan the QR code below to connect your
 						wallet to the website and complete the identity validation process
 					</p>
 				</div>
-				<br />
-				<br />
 			</div>
 		);
 	}

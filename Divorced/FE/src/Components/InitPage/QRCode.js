@@ -1,29 +1,22 @@
 import React, { Component } from 'react';
 import vodafoneLogo from '../InitPage/Assets/vodafone-logo.png';
-import './Style/style.css';
 import { generateQR } from '../API_Calls/init';
 // import { CallInitApi } from '../API_Calls/init';
 import { CompleteCall } from './DataStore/init';
 
 class QRCodeClass extends Component {
-	// constructor(props) {
-	constructor() {
-		// super(props);
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
 			imageUrl: '',
 		};
-		// this.props = props;
+		this.props = props;
 	}
 
 	async componentDidMount() {
-		// const returnData = await CompleteCall(this.props.ws.requestId);
-		const returnData = await CompleteCall();
-		// const returnData = await CallInitApi();
-		// console.log('returnData passed for QR generation:', returnData);
+		const returnData = await CompleteCall(this.props.requestId);
 		const imageData = await generateQR(returnData);
 		this.setState({ imageUrl: imageData });
-		// console.log('props', this.props);
 	}
 
 	timer() {
@@ -49,19 +42,57 @@ class QRCodeClass extends Component {
 
 	render() {
 		return (
-			<div className='qrDivMain-q'>
-				<img src={vodafoneLogo} alt='vodafoneLogo' className='qrLogo-q' />
-				<div id='qrCode' className='qrDiv-q'>
-					{this.state.imageUrl ? (
-						<img
-							src={this.state.imageUrl}
-							alt='qrCode'
-							className='qrDivImg-q'
-						/>
-					) : null}
-				</div>
-				<div id='exp-timer' className='qrTimerDiv-q'>
-					{this.state.imageUrl ? this.timer() : null}
+			<div>
+				<div className='row row-cols-1 row-cols-md-2 g-4'>
+					<div className='col'>
+						<div
+							className='card'
+							style={{
+								border: 'none',
+								float: 'right',
+								paddingTop: '110px',
+								paddingRight: '50px',
+							}}>
+							<img
+								src={vodafoneLogo}
+								className='card-img-top'
+								alt='vf-logo'
+								style={{ height: '80px', width: '280px' }}
+							/>
+						</div>
+					</div>
+					<div className='col'>
+						<div
+							className='card'
+							style={{
+								border: 'none',
+								maxWidth: '450px',
+								paddingLeft: '50px',
+							}}>
+							{this.state.imageUrl ? (
+								<img
+									src={this.state.imageUrl}
+									alt='qrCode'
+									style={{
+										height: '280px',
+										width: '280px',
+									}}
+								/>
+							) : null}
+							<div className='card-body'>
+								<p
+									className='card-title'
+									id='exp-timer'
+									style={{
+										fontSize: '13px',
+										marginTop: '-2%',
+										marginLeft: '15%',
+									}}>
+									{this.state.imageUrl ? this.timer() : null}
+								</p>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		);

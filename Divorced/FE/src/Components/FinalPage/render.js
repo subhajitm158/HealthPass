@@ -2,22 +2,42 @@ import React, { Component } from 'react';
 import Header from './Header';
 import LeftPanel from './LeftPanel';
 import RightPanel from './RightPanel';
-import './Style/style.css';
 
 class FRender extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
-			counter: 0,
+			name: '',
 		};
+		this.props = props;
 	}
+
+	componentDidMount() {
+		this.setState({
+			name:
+				this.props.data.payload.credentialSubject.recipient.givenName +
+				' ' +
+				this.props.data.payload.credentialSubject.recipient.middleName +
+				' ' +
+				this.props.data.payload.credentialSubject.recipient.familyName,
+		});
+	}
+
 	render() {
 		return (
-			<div className='renderFinal-r'>
-				<Header />
-				<div className='renderBody-r'>
-					<LeftPanel />
-					<RightPanel />
+			<div
+				className='overflow-hidden'
+				style={{
+					padding: '20px 0px 0px 30px',
+				}}>
+				<Header name={this.state.name} />
+				<div className='row row-cols-1 row-cols-md-2 g-4'>
+					<div className='col'>
+						<LeftPanel data={this.props.data} />
+					</div>
+					<div className='col'>
+						<RightPanel />
+					</div>
 				</div>
 			</div>
 		);

@@ -19,17 +19,17 @@ class RightPanel extends Component {
 						}}>
 						Multiple ways to save and start using your Pass.
 					</h2>
-					<div className='card-deck' style={{ display: 'flex' }}>
-						<div className='card' style={{ width: '50%', border: 'none' }}>
-							<nav className='navbar navbar-light'>
-								<div className='container-fluid'>
-									<a className='navbar-brand' href='#'>
+					<div class='card-deck' style={{ display: 'flex' }}>
+						<div class='card' style={{ width: '50%', border: 'none' }}>
+							<nav class='navbar navbar-light'>
+								<div class='container-fluid'>
+									<a class='navbar-brand' href='#'>
 										<img
 											src={save}
 											alt=''
 											width='30'
 											height='24'
-											className='d-inline-block align-text-top'
+											class='d-inline-block align-text-top'
 										/>
 										<span style={{ fontSize: '15px' }}>
 											&nbsp;Add it to your Vodafone DDI Wallet
@@ -46,7 +46,7 @@ class RightPanel extends Component {
 								or Google Play Store. Then, add your Pass for easy access later.
 							</p>
 						</div>
-						<div className='card' style={{ width: '50%', border: 'none' }}>
+						<div class='card' style={{ width: '50%', border: 'none' }}>
 							<img
 								src={googleplay}
 								alt='googlePlay'
@@ -71,17 +71,17 @@ class RightPanel extends Component {
 							/>
 						</div>
 					</div>
-					<div className='card-deck' style={{ display: 'flex' }}>
-						<div className='card' style={{ width: '50%', border: 'none' }}>
-							<nav className='navbar navbar-light'>
-								<div className='container-fluid'>
-									<a className='navbar-brand' href='#'>
+					<div class='card-deck' style={{ display: 'flex' }}>
+						<div class='card' style={{ width: '50%', border: 'none' }}>
+							<nav class='navbar navbar-light'>
+								<div class='container-fluid'>
+									<a class='navbar-brand' href='#'>
 										<img
 											src={save}
 											alt=''
 											width='30'
 											height='24'
-											className='d-inline-block align-text-top'
+											class='d-inline-block align-text-top'
 										/>
 										<span style={{ fontSize: '15px' }}>
 											&nbsp;Add it to your iPhone Apple Wallet
@@ -98,7 +98,7 @@ class RightPanel extends Component {
 								anytime.
 							</p>
 						</div>
-						<div className='card' style={{ width: '50%', border: 'none' }}>
+						<div class='card' style={{ width: '50%', border: 'none' }}>
 							<img
 								src={applewallet}
 								alt='applewallet'
@@ -113,17 +113,17 @@ class RightPanel extends Component {
 							/>
 						</div>
 					</div>
-					<div className='card-deck' style={{ display: 'flex' }}>
-						<div className='card' style={{ width: '50%', border: 'none' }}>
-							<nav className='navbar navbar-light'>
-								<div className='container-fluid'>
-									<a className='navbar-brand' href='#'>
+					<div class='card-deck' style={{ display: 'flex' }}>
+						<div class='card' style={{ width: '50%', border: 'none' }}>
+							<nav class='navbar navbar-light'>
+								<div class='container-fluid'>
+									<a class='navbar-brand' href='#'>
 										<img
 											src={print}
 											alt=''
 											width='30'
 											height='24'
-											className='d-inline-block align-text-top'
+											class='d-inline-block align-text-top'
 										/>
 										<span style={{ fontSize: '15px' }}>
 											&nbsp;Print your Pass
@@ -141,7 +141,7 @@ class RightPanel extends Component {
 							</p>
 						</div>
 						<div
-							className='card'
+							class='card'
 							style={{
 								width: '50%',
 								border: 'none',

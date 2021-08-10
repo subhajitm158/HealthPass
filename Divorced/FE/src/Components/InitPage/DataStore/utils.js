@@ -6,7 +6,7 @@ export async function getNonce() {
 	let trace_id = generateTraceId();
 
 	return axios
-		.post(process.env.REACT_APP_NONCE_ROUTE, {
+		.post(process.env.REACT_APP_BE_URL + process.env.REACT_APP_NONCE_ROUTE, {
 			trace_id: trace_id,
 		})
 		.then(function (response) {
@@ -27,10 +27,8 @@ export async function generateTopic() {
 	return text;
 }
 
-// export async function buildJsPayloadJWT(topic, nonce, authId, requestId) {
-export async function buildJsPayloadJWT(topic, nonce, authId) {
-	// var jwt_token = createJWT(topic, nonce, authId, requestId);
-	var jwt_token = createJWT(topic, nonce, authId);
+export async function buildJsPayloadJWT(topic, nonce, authId, requestId) {
+	var jwt_token = createJWT(topic, nonce, authId, requestId);
 
 	return jwt_token;
 }
@@ -45,8 +43,7 @@ function generateTraceId() {
 	return id;
 }
 
-// function createJWT(topic, nonce, authId, requestId) {
-function createJWT(topic, nonce, authId) {
+function createJWT(topic, nonce, authId, requestId) {
 	var payload = {
 		serviceName: process.env.REACT_APP_SERVICE_NAME,
 		serviceDid: process.env.REACT_APP_SERVICE_ADDRESS,
@@ -61,8 +58,9 @@ function createJWT(topic, nonce, authId) {
 		nonce: nonce,
 		authorizationId: authId,
 		ghpLoginUrl: process.env.REACT_APP_API + process.env.REACT_APP_LOGIN_ROUTE,
-		// returnUrl: `${process.env.REACT_APP_RETURN_URL}?requestId=${requestId}`,
-		returnUrl: `${process.env.REACT_APP_RETURN_URL}`,
+		returnUrl: `${
+			process.env.REACT_APP_BE_URL + process.env.REACT_APP_POLL_ROUTE
+		}?requestId=${requestId}`,
 		topic: topic,
 	};
 	var token = jwt.sign(

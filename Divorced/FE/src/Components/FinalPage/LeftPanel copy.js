@@ -10,7 +10,7 @@ import {
 	GetPassExpirationDate,
 } from '../API_Calls/details';
 
-function LeftPanel({ data }) {
+function LeftPanel() {
 	const [name, setName] = useState('');
 	const [dob, setDOB] = useState('');
 	const [passExp, setPassExp] = useState('');
@@ -19,15 +19,15 @@ function LeftPanel({ data }) {
 
 	useEffect(() => {
 		async function fetchData() {
-			// const returnData = await CallDetailsLoginApi();
-			// const returnqr = await CallDetailsQRApi(returnData);
-			const imgurl = await generateQR(JSON.stringify(data));
+			const returnData = await CallDetailsLoginApi();
+			const returnqr = await CallDetailsQRApi(returnData);
+			const imgurl = await generateQR(JSON.stringify(returnqr));
 			setImageUrl(imgurl);
-			const Name = await GetName(data);
+			const Name = await GetName(returnqr);
 			setName(Name);
-			const DOB = await GetDateofBirth(data);
+			const DOB = await GetDateofBirth(returnqr);
 			setDOB(DOB);
-			const exp = await GetPassExpirationDate(data);
+			const exp = await GetPassExpirationDate(returnqr);
 			setPassExp(exp);
 		}
 
@@ -41,7 +41,7 @@ function LeftPanel({ data }) {
 					className='card-img'
 					src={main}
 					style={{ height: '370px', borderRadius: '5%' }}
-					alt='Card'
+					alt='Card image'
 				/>
 				<div
 					className='card-img-overlay'

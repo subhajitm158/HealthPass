@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export async function CallDetailsLoginApi() {
 	return axios
-		.post(process.env.REACT_APP_LOGIN_ROUTE)
+		.post(process.env.REACT_APP_BE_URL + process.env.REACT_APP_LOGIN_ROUTE)
 		.then(function (response) {
 			return response.data;
 		})
@@ -15,10 +15,7 @@ export async function CallDetailsLoginApi() {
 
 export async function CallDetailsQRApi(auth_token) {
 	return axios
-		.post(process.env.REACT_APP_DATA_ROUTE, {
-			token: auth_token.access_token,
-			token_type: auth_token.token_type,
-		})
+		.post(process.env.REACT_APP_BE_URL + process.env.REACT_APP_DATA_ROUTE)
 		.then(function (response) {
 			return response.data;
 		})
