@@ -1,0 +1,28 @@
+{
+	"name": "health_pass_be",
+	"version": "1.0.0",
+	"description": "",
+	"main": "server.js",
+	"dependencies": {
+		"axios": "^0.21.1",
+		"body-parser": "^1.19.0",
+		"cors": "^2.8.5",
+		"dotenv": "^10.0.0",
+		"express": "^4.17.1",
+		"faker": "^5.5.3",
+		"needle": "^2.8.0",
+		"socket.io": "^4.1.3",
+		"socket.io-client": "^4.1.3",
+		"uuid": "^8.3.2"
+	},
+	"scripts": {
+		"server": "node -r dotenv/config server.js dotenv_config_path=./config/.env",
+		"dev": "nodemon server.js"
+	},
+	"keywords": [],
+	"author": "Nandini Maheshwari",
+	"license": "ISC",
+	"devDependencies": {
+		"nodemon": "^2.0.12"
+	}
+}
