@@ -17,18 +17,8 @@ export async function getNonce() {
 		});
 }
 
-export async function generateTopic() {
-	let text = '';
-	let possible =
-		'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-	for (let i = 0; i < 10; i++)
-		text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-	return text;
-}
-
-export async function buildJsPayloadJWT(topic, nonce, authId, requestId) {
-	var jwt_token = createJWT(topic, nonce, authId, requestId);
+export async function buildJsPayloadJWT(nonce, authId, requestId) {
+	var jwt_token = createJWT(nonce, authId, requestId);
 
 	return jwt_token;
 }
@@ -43,7 +33,7 @@ function generateTraceId() {
 	return id;
 }
 
-function createJWT(topic, nonce, authId, requestId) {
+function createJWT(nonce, authId, requestId) {
 	var payload = {
 		serviceName: process.env.REACT_APP_SERVICE_NAME,
 		serviceDid: process.env.REACT_APP_SERVICE_ADDRESS,
@@ -61,7 +51,6 @@ function createJWT(topic, nonce, authId, requestId) {
 		returnUrl: `${
 			process.env.REACT_APP_BE_URL + process.env.REACT_APP_POLL_ROUTE
 		}?requestId=${requestId}`,
-		topic: topic,
 	};
 
 	var token = encodeJWT(payload);
