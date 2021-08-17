@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-import { encodeJWT } from '../../API_Calls/details';
+// import { encodeJWT } from '../../API_Calls/details';
 import axios from 'axios';
 
 export async function getNonce() {
@@ -36,7 +36,7 @@ function generateTraceId() {
 function createJWT(nonce, authId, requestId) {
 	var payload = {
 		serviceName: process.env.REACT_APP_SERVICE_NAME,
-		serviceDid: process.env.REACT_APP_SERVICE_ADDRESS,
+		serviceDid: process.env.REACT_APP_SERVICE_DID_ADDRESS,
 		iat: Math.floor(Date.now() / 1000),
 		exp:
 			Math.floor(Date.now() / 1000) +
@@ -53,7 +53,7 @@ function createJWT(nonce, authId, requestId) {
 		}?requestId=${requestId}`,
 	};
 
-	var token = encodeJWT(payload);
+	// var token = encodeJWT(payload);
 
-	return token;
+	return payload;
 }

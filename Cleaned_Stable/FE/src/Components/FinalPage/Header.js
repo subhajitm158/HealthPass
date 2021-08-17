@@ -1,39 +1,57 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import LeftPanel from './LeftPanel';
 import RightPanel from './RightPanel';
 import { CallDetailsDemoApi, GetName } from '../API_Calls/details';
+import { useCookies } from 'react-cookie';
+import Cookies from 'js-cookie';
+import FRender from '../InitPage/render';
 
-class Header extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			name: '',
-		};
-		this.props = props;
-	}
+function Header({ data }) {
+	const [name, setName] = useState('');
+	const [cookies, setCookie, removeCookie] = useCookies('reqid');
 
-	async componentDidMount() {
-		if (this.props.data === undefined) {
-			const requestId = '2ca20a12-a5cf-4072-9498-d3a4f6912df9';
+	useEffect(() => {
+		async function ab() {
+			if (data === undefined) {
+				const requestId =
+					cookies.reqid === undefined
+						? '2ca20a12-a5cf-4072-9498-d3a4f6912df9'
+						: cookies.reqid;
 
-			await CallDetailsDemoApi();
+				if (Cookies.get(requestId) === undefined) {
+					const returnData = await CallDetailsDemoApi();
 
-			const returnData = JSON.parse(sessionStorage.getItem(requestId));
+					setCookie(requestId, JSON.stringify(returnData), {
+						maxAge: 900,
+					});
 
-			const Name = await GetName(returnData);
-			this.setState({ name: Name });
-		} else {
-			const Name = await GetName(this.props.data);
-			this.setState({ name: Name });
+					const Name = await GetName(returnData);
+					setName(Name);
+				} else {
+					const Name = await GetName(JSON.parse(Cookies.get(requestId)));
+					setName(Name);
+				}
+			} else {
+				const Name = await GetName(JSON.parse(data));
+				setName(Name);
+			}
 		}
-	}
 
-	render() {
-		const requestId = '2ca20a12-a5cf-4072-9498-d3a4f6912df9';
+		ab();
+	}, []);
 
-		return (
-			<div>
-				{this.state.name ? (
+	const logout = () => {
+		removeCookie(cookies.reqid);
+		removeCookie('reqid');
+		setName('logout');
+	};
+
+	return (
+		<div>
+			{name ? (
+				name === 'logout' ? (
+					<FRender />
+				) : (
 					<div>
 						<h2
 							className='display-4'
@@ -41,20 +59,30 @@ class Header extends Component {
 								fontSize: '20px',
 								fontWeight: '400',
 							}}>
-							Hi, {this.state.name}. Here's your Pass.
+							Hi, {name}. Here's your Pass.
 						</h2>
 						<p className='text-muted' style={{ fontSize: '10px' }}>
 							Your pass is now active. Be sure to save your pass before you
 							leave.
 						</p>
+						<button
+							id='Print'
+							className='btn btn-danger'
+							style={{
+								float: 'right',
+								textAlign: 'center',
+								marginRight: '20px',
+								marginTop: '-63px',
+							}}
+							onClick={logout}>
+							Logout
+						</button>
 						<div className='overflow-hidden'>
 							<div className='row row-cols-1 row-cols-md-2 g-4'>
 								<div className='col'>
 									<LeftPanel
 										data={
-											this.props.data === undefined
-												? JSON.parse(sessionStorage.getItem(requestId))
-												: this.props.data
+											data === undefined ? Cookies.get(cookies.reqid) : data
 										}
 									/>
 								</div>
@@ -64,19 +92,19 @@ class Header extends Component {
 							</div>
 						</div>
 					</div>
-				) : (
-					<h2
-						className='display-4'
-						style={{
-							fontSize: '30px',
-							fontWeight: '400',
-						}}>
-						Your Vaccination Credentials are loading...
-					</h2>
-				)}
-			</div>
-		);
-	}
+				)
+			) : (
+				<h2
+					className='display-4'
+					style={{
+						fontSize: '30px',
+						fontWeight: '400',
+					}}>
+					Your Vaccination Credentials are loading...
+				</h2>
+			)}
+		</div>
+	);
 }
 
 export default Header;

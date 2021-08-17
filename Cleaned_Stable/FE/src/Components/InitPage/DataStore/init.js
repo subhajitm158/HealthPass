@@ -8,12 +8,14 @@ export async function CompleteCall(requestId) {
 
 	if (http_promise === undefined) {
 		console.error('Nonce route failed...');
+
+		return '';
 	} else {
 		nonce = http_promise.nonce;
 		authId = http_promise.authorizationId;
+
+		let payload = buildJsPayloadJWT(nonce, authId, requestId);
+
+		return payload;
 	}
-
-	let payload = buildJsPayloadJWT(nonce, authId, requestId);
-
-	return payload;
 }

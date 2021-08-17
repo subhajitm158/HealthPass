@@ -12,6 +12,11 @@ const postCall = async (url, data, options) => {
 	return response;
 };
 
+const getCall = async (url, data, options) => {
+	const response = await needle('get', url, data, options);
+	return response;
+};
+
 const checkStatusCode = (codeArr, statusCode, level, details) => {
 	try {
 		if (codeArr.indexOf(statusCode) === -1) {
@@ -37,4 +42,5 @@ module.exports = {
 	postCall,
 	checkStatusCode,
 	throwError,
+	getCall,
 };

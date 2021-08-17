@@ -1,0 +1,25 @@
+{
+	"userDid": "did:erc725:8033ba90775dbc480767160fef709ef5806e0baf",
+	"iat": 1516256022,
+	"signedNonce": "1234567890",
+	"verifiableCredentials": [
+		{
+			"@context": ["https://www.w3.org/2018/credentials/v1"],
+			"credentialSubject": {
+				"CLAIM_FIRST_NAME": "Lorenzo",
+				"CLAIM_LAST_NAME": "Lombardo",
+				"id": "did:erc725:8033ba90775dbc480767160fef709ef5806e0baf"
+			},
+			"issuanceDate": "2019-09-02T16:21:00Z",
+			"expireDate": "2020-09-02T16:21:00Z",
+			"issuer": "did:erc725:8033ba90775dbc480767160fef709ef5806e0baf",
+			"proof": {
+				"created": "2019-09-02T16:21:00Z",
+				"signatureValue": "0xf485d556e4b6a78670931a8aa36e513feff94986d8dca708063e71768fc5912229ca927ef6e8656e2ffcdbd2f9689e4ccbc064736abf49dd69233cdc47409c971b",
+				"type": "RsaSignature2018"
+			},
+			"type": ["VerifiableCredential", "SelfIssuedCredential", "CLAIM_FIRST_NAMECredential", "CLAIM_LAST_NAMECredential"]
+		}
+	],
+	"https://api.ddi.id.vodafone.com/profileType": "business"
+}

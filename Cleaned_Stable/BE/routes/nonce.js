@@ -1,12 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const axios = require('axios');
-const { postCall, throwError } = require('../utilities/utils');
+const { getCall, throwError } = require('../utilities/utils');
 
 router.post('/', async (req, res) => {
 	try {
-		const body = await postCall(
-			process.env.GHPURL + process.env.NONCE_ROUTE,
+		const response = await getCall(
+			`${process.env.GHPURL}${process.env.NONCE_ROUTE}`,
 			{},
 			{
 				headers: {
@@ -15,11 +14,11 @@ router.post('/', async (req, res) => {
 			},
 		);
 
-		[200].indexOf(response.statusCode) === -1
+		[200, 201].indexOf(response.statusCode) === -1
 			? throwError('nonce', 'Nonce not fetched', response.body)
 			: null;
 
-		res.status(200).json(body.data);
+		res.status(200).json(response.body);
 	} catch (err) {
 		console.error(err);
 	}

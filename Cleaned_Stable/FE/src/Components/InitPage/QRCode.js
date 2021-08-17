@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import vodafoneLogo from '../InitPage/Assets/vodafone-logo.png';
-import { generateQR } from '../API_Calls/init';
+import { generateQR } from '../API_Calls/details';
 import { CompleteCall } from './DataStore/init';
 
 class QRCodeClass extends Component {
@@ -14,6 +14,11 @@ class QRCodeClass extends Component {
 
 	async componentDidMount() {
 		const returnData = await CompleteCall(this.props.reqid);
+		// document.getElementById('qr').innerHTML = `<p>${JSON.stringify(
+		// 	returnData,
+		// )}</p>`;
+		// const encodedData = await encodeJWT(returnData);
+		// console.log(encodedData);
 		const imageData = await generateQR(returnData);
 		this.setState({ imageUrl: imageData });
 		console.log('props', this.props);
@@ -44,6 +49,7 @@ class QRCodeClass extends Component {
 	render() {
 		return (
 			<div>
+				{/* <div id='qr'></div> */}
 				<div className='row row-cols-1 row-cols-md-2 g-4'>
 					<div className='col'>
 						<div

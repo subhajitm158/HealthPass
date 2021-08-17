@@ -7,19 +7,25 @@ import {
 	GetName,
 	GetPassExpirationDate,
 } from '../API_Calls/details';
+import { useCookies } from 'react-cookie';
+import Cookies from 'js-cookie';
 
 function LeftPanel({ data }) {
 	const [name, setName] = useState('');
 	const [dob, setDOB] = useState('');
 	const [passExp, setPassExp] = useState('');
 	const [imageUrl, setImageUrl] = useState('');
+	const [cookies] = useCookies('reqid');
 	const space = '  ';
 
 	useEffect(() => {
 		async function fetchData() {
 			if (data === undefined) {
-				const requestId = '2ca20a12-a5cf-4072-9498-d3a4f6912df9';
-				const returnData = JSON.parse(sessionStorage.getItem(requestId));
+				const requestId =
+					cookies.reqid === undefined
+						? '2ca20a12-a5cf-4072-9498-d3a4f6912df9'
+						: cookies.reqid;
+				const returnData = JSON.parse(Cookies.get(requestId));
 				const imgurl = await generateQR(JSON.stringify(returnData));
 				setImageUrl(imgurl);
 				const Name = await GetName(returnData);
@@ -29,13 +35,13 @@ function LeftPanel({ data }) {
 				const exp = await GetPassExpirationDate(returnData);
 				setPassExp(exp);
 			} else {
-				const imgurl = await generateQR(JSON.stringify(data));
+				const imgurl = await generateQR(JSON.parse(data));
 				setImageUrl(imgurl);
-				const Name = await GetName(data);
+				const Name = await GetName(JSON.parse(data));
 				setName(Name);
-				const DOB = await GetDateofBirth(data);
+				const DOB = await GetDateofBirth(JSON.parse(data));
 				setDOB(DOB);
-				const exp = await GetPassExpirationDate(data);
+				const exp = await GetPassExpirationDate(JSON.parse(data));
 				setPassExp(exp);
 			}
 		}
